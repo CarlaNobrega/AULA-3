@@ -1,0 +1,40 @@
+﻿@model IEnumerable<fp_stack.core.Models.Pergunta>
+@{
+    ViewData["Title"] = "Home Page";
+    //Layout = "_LayoutB";
+
+}
+
+<div class="row">
+    <div class="col-md-3">
+        <email mail-to="rodolfo"></email>
+        <img src="~/images/cat.JPG" asp-append-version="true" />
+    </div>
+    <div class="col-md-3">
+        <h2>ViewBag @ViewBag.Nome</h2>
+        <h2>ViewData @ViewData["NomeDoAluno"]</h2>
+        <h2>ViewData @ViewData["Nome"]</h2>
+
+        <p> Twitter @@rodolfofadino</p>
+    </div>
+    <div class="col-md-3">
+
+        <vc:noticias total="10" noticias-urgentes="true"></vc:noticias>
+
+        @*@await Component.InvokeAsync("Noticias", new { total = 3, noticiasUrgentes = false })*@
+    </div>
+    <div class="col-md-3">
+        <h2>Lista de Perguntas</h2>
+        <ul>
+            @foreach (var item in Model)
+            {
+                <li>
+                    @*<textarea asp-for="@item.Autor"></textarea>*@
+                    <p>@item.Id</p>
+                    <p>@item.Texto</p>
+                    <label asp-for="@item"></label>
+                </li>
+            }
+        </ul>
+    </div>
+</div>

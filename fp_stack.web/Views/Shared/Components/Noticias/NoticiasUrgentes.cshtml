@@ -1,0 +1,9 @@
+﻿@model IEnumerable<fp_stack.web.ViewComponents.Noticia>
+<ul>
+    @foreach (var item in Model)
+    {
+        <li style="background-color:#ffc9c9;">
+            @item.Titulo
+        </li>
+    }
+</ul>
