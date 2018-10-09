@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using fp_stack.core.Models;
 using fp_stack.core.Services;
 using fp_stack.web.Middlewares;
@@ -14,22 +11,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace fp_stack.web
+namespace fp_stack_api
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
-
-        public IConfiguration Configuration { get; }
-
         // This method gets called by the runtime. Use this method to add services to the container.
+        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<NoticiaService>();
-            //services.AddScoped<INoticiaService, NoticiaService>();
 
             var connection = @"Server=(localdb)\mssqllocaldb;Database=StackDB;Trusted_Connection=True;ConnectRetryCount=0";
             services.AddDbContext<Context>(options => options.UseSqlServer(connection));
@@ -44,15 +33,9 @@ namespace fp_stack.web
             {
                 app.UseDeveloperExceptionPage();
             }
+            //app.UseMvc();
 
-            app.UseMeuLog();
-            app.UseStaticFiles();
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
+            app.UseMvcWithDefaultRoute();
         }
     }
 }
